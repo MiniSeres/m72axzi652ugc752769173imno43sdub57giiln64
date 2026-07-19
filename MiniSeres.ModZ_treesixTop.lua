@@ -96,40 +96,32 @@ local SETTINGS_DATA = {
 
 local CONFIG = {
     Tabs = {
-        "Tab01","Tab02","Tab03","Tab04","Tab05","Tab06","Tab07","Tab08","Tab09","Tab10",
-        "Tab11","Tab12","Tab13","Tab14","Tab15","Tab16","Tab17","Tab18","Tab19","Tab20",
-        "Tab21","Tab22","Tab23","Tab24","Tab25","Tab26","Tab27","Tab28","Tab29","Tab30",
-        "Tab31","Tab32","Tab33","Tab34","Tab35","Tab36","Tab37","Tab38","Tab39","Tab40",
-        "Tab41","Tab42","Tab43","Tab44","Tab45","Tab46","Tab47","Tab48","Tab49","Tab50",
-        "Tab51","Tab52","Tab53","Tab54","Tab55","Tab56","Tab57","Tab58","Tab59","Tab60",
-        "Tab61","Tab62","Tab63","Tab64","Tab65","Tab66","Tab67","Tab68","Tab69","Tab70",
-        "Tab71","Tab72","Tab73","Tab74","Tab75","Tab76","Tab77","Tab78","Tab79","Tab80",
-        "Tab81","Tab82","Tab83","Tab84","Tab85","Tab86","Tab87","Tab88","Tab89","Tab90",
-        "Tab91","Tab92","Tab93","Tab94","Tab95","Tab96","Tab97","Tab98","Tab99","Tab100"
+        " ","TSB"
     }
 }
 
 local functionTable = {
-    {n = "Func01", t = "Tab01", u = ""},{n = "Func02", t = "Tab02", u = ""},{n = "Func03", t = "Tab03", u = ""},{n = "Func04", t = "Tab04", u = ""},{n = "Func05", t = "Tab05", u = ""},
-    {n = "Func06", t = "Tab06", u = ""},{n = "Func07", t = "Tab07", u = ""},{n = "Func08", t = "Tab08", u = ""},{n = "Func09", t = "Tab09", u = ""},{n = "Func10", t = "Tab10", u = ""},
-    {n = "Func11", t = "Tab11", u = ""},{n = "Func12", t = "Tab12", u = ""},{n = "Func13", t = "Tab13", u = ""},{n = "Func14", t = "Tab14", u = ""},{n = "Func15", t = "Tab15", u = ""},
-    {n = "Func16", t = "Tab16", u = ""},{n = "Func17", t = "Tab17", u = ""},{n = "Func18", t = "Tab18", u = ""},{n = "Func19", t = "Tab19", u = ""},{n = "Func20", t = "Tab20", u = ""},
-    {n = "Func21", t = "Tab21", u = ""},{n = "Func22", t = "Tab22", u = ""},{n = "Func23", t = "Tab23", u = ""},{n = "Func24", t = "Tab24", u = ""},{n = "Func25", t = "Tab25", u = ""},
-    {n = "Func26", t = "Tab26", u = ""},{n = "Func27", t = "Tab27", u = ""},{n = "Func28", t = "Tab28", u = ""},{n = "Func29", t = "Tab29", u = ""},{n = "Func30", t = "Tab30", u = ""},
-    {n = "Func31", t = "Tab31", u = ""},{n = "Func32", t = "Tab32", u = ""},{n = "Func33", t = "Tab33", u = ""},{n = "Func34", t = "Tab34", u = ""},{n = "Func35", t = "Tab35", u = ""},
-    {n = "Func36", t = "Tab36", u = ""},{n = "Func37", t = "Tab37", u = ""},{n = "Func38", t = "Tab38", u = ""},{n = "Func39", t = "Tab39", u = ""},{n = "Func40", t = "Tab40", u = ""},
-    {n = "Func41", t = "Tab41", u = ""},{n = "Func42", t = "Tab42", u = ""},{n = "Func43", t = "Tab43", u = ""},{n = "Func44", t = "Tab44", u = ""},{n = "Func45", t = "Tab45", u = ""},
-    {n = "Func46", t = "Tab46", u = ""},{n = "Func47", t = "Tab47", u = ""},{n = "Func48", t = "Tab48", u = ""},{n = "Func49", t = "Tab49", u = ""},{n = "Func50", t = "Tab50", u = ""},
-    {n = "Func51", t = "Tab51", u = ""},{n = "Func52", t = "Tab52", u = ""},{n = "Func53", t = "Tab53", u = ""},{n = "Func54", t = "Tab54", u = ""},{n = "Func55", t = "Tab55", u = ""},
-    {n = "Func56", t = "Tab56", u = ""},{n = "Func57", t = "Tab57", u = ""},{n = "Func58", t = "Tab58", u = ""},{n = "Func59", t = "Tab59", u = ""},{n = "Func60", t = "Tab60", u = ""},
-    {n = "Func61", t = "Tab61", u = ""},{n = "Func62", t = "Tab62", u = ""},{n = "Func63", t = "Tab63", u = ""},{n = "Func64", t = "Tab64", u = ""},{n = "Func65", t = "Tab65", u = ""},
-    {n = "Func66", t = "Tab66", u = ""},{n = "Func67", t = "Tab67", u = ""},{n = "Func68", t = "Tab68", u = ""},{n = "Func69", t = "Tab69", u = ""},{n = "Func70", t = "Tab70", u = ""},
-    {n = "Func71", t = "Tab71", u = ""},{n = "Func72", t = "Tab72", u = ""},{n = "Func73", t = "Tab73", u = ""},{n = "Func74", t = "Tab74", u = ""},{n = "Func75", t = "Tab75", u = ""},
-    {n = "Func76", t = "Tab76", u = ""},{n = "Func77", t = "Tab77", u = ""},{n = "Func78", t = "Tab78", u = ""},{n = "Func79", t = "Tab79", u = ""},{n = "Func80", t = "Tab80", u = ""},
-    {n = "Func81", t = "Tab81", u = ""},{n = "Func82", t = "Tab82", u = ""},{n = "Func83", t = "Tab83", u = ""},{n = "Func84", t = "Tab84", u = ""},{n = "Func85", t = "Tab85", u = ""},
-    {n = "Func86", t = "Tab86", u = ""},{n = "Func87", t = "Tab87", u = ""},{n = "Func88", t = "Tab88", u = ""},{n = "Func89", t = "Tab89", u = ""},{n = "Func90", t = "Tab90", u = ""},
-    {n = "Func91", t = "Tab91", u = ""},{n = "Func92", t = "Tab92", u = ""},{n = "Func93", t = "Tab93", u = ""},{n = "Func94", t = "Tab94", u = ""},{n = "Func95", t = "Tab95", u = ""},
-    {n = "Func96", t = "Tab96", u = ""},{n = "Func97", t = "Tab97", u = ""},{n = "Func98", t = "Tab98", u = ""},{n = "Func99", t = "Tab99", u = ""},{n = "Func100", t = "Tab100", u = ""}
+    {n = "Kiba Tech", t = "TSB", u = "https://gist.githubusercontent.com/MiniSeres/5f14b30ea1651f93fcf03f1ccfe14e4e/raw/77b825e921ad3efa4ac808ab7e03e599b0b4df0d/kyotoModZ.lua"},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    {n = " ", t = " ", u = " "},
+    
 }
 
 local screenGui = Instance.new("ScreenGui")
