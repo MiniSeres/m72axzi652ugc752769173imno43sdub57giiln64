@@ -49,7 +49,7 @@ local SETTINGS_DATA = {
 local CONFIG = {
     MainTitle = "MnSr",
     SubTitle = "MiniSeres",
-    Tabs = {"Control", "Utility", "System"}
+    Tabs = {"Control", "Utility", "System","a","b","c","d","e","f","g","h","t"}
 }
 
 local functionTable = {
@@ -58,6 +58,45 @@ local functionTable = {
     {n = "Fly", t = "Utility", u = "https://raw.githubusercontent.com/.../fly.lua"},
     {n = "Teleport", t = "Utility", u = "https://raw.githubusercontent.com/.../tele.lua"},
     {n = "Settings", t = "System", u = ""}
+    {n = "Mnitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Mnitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Mitor", t = "Control", u = ""},
+    {n = "Monior", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monir", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Mntor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "onitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitr", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "Monitor", t = "Control", u = ""},
+    {n = "a", t = "Control", u = ""},
+    {n = "b", t = "Control", u = ""},
+    {n = "c", t = "Control", u = ""},
+    {n = "d", t = "Control", u = ""},
+    {n = "e", t = "Control", u = ""},
+    {n = "f", t = "Control", u = ""},
+    {n = "g", t = "Control", u = ""},
+    {n = "h", t = "Control", u = ""},
+    {n = "t", t = "Control", u = ""},
+    
+    
 }
 
 local screenGui = Instance.new("ScreenGui")
