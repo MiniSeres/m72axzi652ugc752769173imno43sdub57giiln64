@@ -96,32 +96,12 @@ local SETTINGS_DATA = {
 
 local CONFIG = {
     Tabs = {
-        " ","TSB"
+        "TSB"
     }
 }
 
 local functionTable = {
     {n = "Kiba Tech", t = "TSB", u = "https://gist.githubusercontent.com/MiniSeres/5f14b30ea1651f93fcf03f1ccfe14e4e/raw/77b825e921ad3efa4ac808ab7e03e599b0b4df0d/kyotoModZ.lua"},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    {n = " ", t = " ", u = " "},
-    
 }
 
 local screenGui = Instance.new("ScreenGui")
@@ -370,7 +350,6 @@ for _, tabName in ipairs(CONFIG.Tabs) do
 end
 
 tabContainer.CanvasSize = UDim2.new(0, 0, 0, #CONFIG.Tabs * 38 + 8)
-
 local content = Instance.new("Frame")
 content.Size = UDim2.new(1, -152, 1, -12)
 content.Position = UDim2.new(0, 142, 0, 6)
@@ -389,24 +368,23 @@ contentHeader.BackgroundTransparency = 1
 contentHeader.Parent = content
 
 local headerTitle = Instance.new("TextLabel")
-headerTitle.Size = UDim2.new(0, 120, 1, 0)
+headerTitle.Size = UDim2.new(0, 80, 1, 0)
 headerTitle.BackgroundTransparency = 1
-headerTitle.Text = "CONTROL"
+headerTitle.Text = "CTRL"
 headerTitle.TextColor3 = COLORS.Text
-headerTitle.TextSize = 18
+headerTitle.TextSize = 16
 headerTitle.Font = Enum.Font.GothamBold
 headerTitle.TextXAlignment = Enum.TextXAlignment.Left
 headerTitle.Parent = contentHeader
 
--- SYSTEM MONITOR (FPS, PING, RAM)
 local monitorFrame = Instance.new("Frame")
-monitorFrame.Size = UDim2.new(0, 210, 1, 0)
-monitorFrame.Position = UDim2.new(0.5, -20, 0, 0)
+monitorFrame.Size = UDim2.new(0, 280, 1, 0)
+monitorFrame.Position = UDim2.new(0.3, 0, 0, 0)
 monitorFrame.BackgroundTransparency = 1
 monitorFrame.Parent = contentHeader
 
 local fpsLabel = Instance.new("TextLabel")
-fpsLabel.Size = UDim2.new(0, 60, 1, 0)
+fpsLabel.Size = UDim2.new(0, 80, 1, 0)
 fpsLabel.Position = UDim2.new(0, 0, 0, 0)
 fpsLabel.BackgroundTransparency = 1
 fpsLabel.Text = "FPS: 60"
@@ -417,8 +395,8 @@ fpsLabel.TextXAlignment = Enum.TextXAlignment.Center
 fpsLabel.Parent = monitorFrame
 
 local pingLabel = Instance.new("TextLabel")
-pingLabel.Size = UDim2.new(0, 60, 1, 0)
-pingLabel.Position = UDim2.new(0, 70, 0, 0)
+pingLabel.Size = UDim2.new(0, 80, 1, 0)
+pingLabel.Position = UDim2.new(0, 90, 0, 0)
 pingLabel.BackgroundTransparency = 1
 pingLabel.Text = "Ping: 20ms"
 pingLabel.TextColor3 = COLORS.Blue
@@ -428,8 +406,8 @@ pingLabel.TextXAlignment = Enum.TextXAlignment.Center
 pingLabel.Parent = monitorFrame
 
 local ramLabel = Instance.new("TextLabel")
-ramLabel.Size = UDim2.new(0, 60, 1, 0)
-ramLabel.Position = UDim2.new(0, 140, 0, 0)
+ramLabel.Size = UDim2.new(0, 80, 1, 0)
+ramLabel.Position = UDim2.new(0, 180, 0, 0)
 ramLabel.BackgroundTransparency = 1
 ramLabel.Text = "RAM: 0.0GB"
 ramLabel.TextColor3 = COLORS.Orange
@@ -708,20 +686,17 @@ local function renderFunctions(tabName)
             
             btn.MouseButton1Click:Connect(function()
                 if item.u and item.u ~= "" then
-                    pcall(function()
-                        local scriptContent = HttpService:GetAsync(item.u)
-                        if scriptContent then
-                            local func = loadstring(scriptContent)
-                            if func then
-                                func()
-                                showNotification("Loaded: " .. item.n, "success")
-                            else
-                                showNotification("Failed to execute: " .. item.n, "error")
-                            end
+                    showNotification("Loading: " .. item.n, "info")
+                    coroutine.wrap(function()
+                        local success, err = pcall(function()
+                            loadstring(game:HttpGet(item.u))()
+                        end)
+                        if success then
+                            showNotification("Loaded: " .. item.n, "success")
                         else
-                            showNotification("Not found: " .. item.n, "warning")
+                            showNotification("Error: " .. tostring(err), "error")
                         end
-                    end)
+                    end)()
                 else
                     showNotification("Opened: " .. item.n, "success")
                 end
@@ -788,7 +763,6 @@ backBtn.MouseButton1Click:Connect(function()
         Size = UDim2.new(0, 720, 0, 500)
     }):Play()
 end)
-
 local miniFrame = nil
 local isFolded = false
 local dragIndex = 1
