@@ -38,8 +38,56 @@ local TRANSPARENCY = {
 
 local DRAG_FRAMES = {"|", "/", "-", "\\"}
 
+local AVATAR_URL = ""
+local function getAvatar()
+    local success, thumb = pcall(function()
+        return Players:GetUserThumbnailAsync(userId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size420x420)
+    end)
+    AVATAR_URL = (success and thumb) or ""
+end
+getAvatar()
+
+local CURRENT_THEME = "Dark"
+
+local function applyTheme(theme)
+    CURRENT_THEME = theme
+    if theme == "Light" then
+        COLORS.Bg = Color3.fromRGB(240, 242, 248)
+        COLORS.Sidebar = Color3.fromRGB(220, 222, 228)
+        COLORS.Content = Color3.fromRGB(230, 232, 240)
+        COLORS.Text = Color3.fromRGB(20, 22, 28)
+        COLORS.TextSub = Color3.fromRGB(80, 85, 100)
+        COLORS.FoldBg = Color3.fromRGB(180, 182, 190)
+        COLORS.ExitBg = Color3.fromRGB(200, 40, 40)
+    else
+        COLORS.Bg = Color3.fromRGB(8, 10, 16)
+        COLORS.Sidebar = Color3.fromRGB(5, 7, 12)
+        COLORS.Content = Color3.fromRGB(12, 15, 22)
+        COLORS.Text = Color3.fromRGB(230, 230, 240)
+        COLORS.TextSub = Color3.fromRGB(160, 165, 180)
+        COLORS.FoldBg = Color3.fromRGB(200, 200, 210)
+        COLORS.ExitBg = Color3.fromRGB(200, 40, 40)
+    end
+    if main then
+        main.BackgroundColor3 = COLORS.Bg
+        sidebar.BackgroundColor3 = COLORS.Sidebar
+        content.BackgroundColor3 = COLORS.Content
+        titleMain.TextColor3 = COLORS.Text
+        titleSub.TextColor3 = COLORS.TextSub
+        headerTitle.TextColor3 = COLORS.Text
+        for _, btn in ipairs(tabBtns) do
+            btn.TextColor3 = COLORS.Text
+        end
+        nameMain.TextColor3 = COLORS.Text
+        nameSub.TextColor3 = COLORS.TextSub
+    end
+end
+
 local SETTINGS_DATA = {
-    Theme = {type = "toggle", value = "Dark", options = {"Dark", "Light"}},
+    Theme = {type = "toggle", value = "Dark", options = {"Dark", "Light"}, action = function(val)
+        applyTheme(val)
+        showNotification("Theme → " .. val, "info")
+    end},
     Sound = {type = "toggle", value = "On", options = {"On", "Off"}},
     AutoUpdate = {type = "toggle", value = "Off", options = {"On", "Off"}},
     DragSensitivity = {type = "slider", value = 50, min = 10, max = 100},
@@ -47,63 +95,53 @@ local SETTINGS_DATA = {
 }
 
 local CONFIG = {
-    MainTitle = "MnSr",
-    SubTitle = "MiniSeres",
-    Tabs = {"Control", "Utility", "System","a","b","c","d","e","f","g","h","t"}
+    Tabs = {
+        "Tab01","Tab02","Tab03","Tab04","Tab05","Tab06","Tab07","Tab08","Tab09","Tab10",
+        "Tab11","Tab12","Tab13","Tab14","Tab15","Tab16","Tab17","Tab18","Tab19","Tab20",
+        "Tab21","Tab22","Tab23","Tab24","Tab25","Tab26","Tab27","Tab28","Tab29","Tab30",
+        "Tab31","Tab32","Tab33","Tab34","Tab35","Tab36","Tab37","Tab38","Tab39","Tab40",
+        "Tab41","Tab42","Tab43","Tab44","Tab45","Tab46","Tab47","Tab48","Tab49","Tab50",
+        "Tab51","Tab52","Tab53","Tab54","Tab55","Tab56","Tab57","Tab58","Tab59","Tab60",
+        "Tab61","Tab62","Tab63","Tab64","Tab65","Tab66","Tab67","Tab68","Tab69","Tab70",
+        "Tab71","Tab72","Tab73","Tab74","Tab75","Tab76","Tab77","Tab78","Tab79","Tab80",
+        "Tab81","Tab82","Tab83","Tab84","Tab85","Tab86","Tab87","Tab88","Tab89","Tab90",
+        "Tab91","Tab92","Tab93","Tab94","Tab95","Tab96","Tab97","Tab98","Tab99","Tab100"
+    }
 }
 
 local functionTable = {
-    {n = "Dashboard", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Fly", t = "Utility", u = "https://raw.githubusercontent.com/.../fly.lua"},
-    {n = "Teleport", t = "Utility", u = "https://raw.githubusercontent.com/.../tele.lua"},
-    {n = "Settings", t = "System", u = ""},
-    {n = "Mnitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Mnitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Mitor", t = "Control", u = ""},
-    {n = "Monior", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monir", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Mntor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "onitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitr", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "Monitor", t = "Control", u = ""},
-    {n = "a", t = "Control", u = ""},
-    {n = "b", t = "Control", u = ""},
-    {n = "c", t = "Control", u = ""},
-    {n = "d", t = "Control", u = ""},
-    {n = "e", t = "Control", u = ""},
-    {n = "f", t = "Control", u = ""},
-    {n = "g", t = "Control", u = ""},
-    {n = "h", t = "Control", u = ""},
-    {n = "t", t = "Control", u = ""}
+    {n = "Func01", t = "Tab01", u = ""},{n = "Func02", t = "Tab02", u = ""},{n = "Func03", t = "Tab03", u = ""},{n = "Func04", t = "Tab04", u = ""},{n = "Func05", t = "Tab05", u = ""},
+    {n = "Func06", t = "Tab06", u = ""},{n = "Func07", t = "Tab07", u = ""},{n = "Func08", t = "Tab08", u = ""},{n = "Func09", t = "Tab09", u = ""},{n = "Func10", t = "Tab10", u = ""},
+    {n = "Func11", t = "Tab11", u = ""},{n = "Func12", t = "Tab12", u = ""},{n = "Func13", t = "Tab13", u = ""},{n = "Func14", t = "Tab14", u = ""},{n = "Func15", t = "Tab15", u = ""},
+    {n = "Func16", t = "Tab16", u = ""},{n = "Func17", t = "Tab17", u = ""},{n = "Func18", t = "Tab18", u = ""},{n = "Func19", t = "Tab19", u = ""},{n = "Func20", t = "Tab20", u = ""},
+    {n = "Func21", t = "Tab21", u = ""},{n = "Func22", t = "Tab22", u = ""},{n = "Func23", t = "Tab23", u = ""},{n = "Func24", t = "Tab24", u = ""},{n = "Func25", t = "Tab25", u = ""},
+    {n = "Func26", t = "Tab26", u = ""},{n = "Func27", t = "Tab27", u = ""},{n = "Func28", t = "Tab28", u = ""},{n = "Func29", t = "Tab29", u = ""},{n = "Func30", t = "Tab30", u = ""},
+    {n = "Func31", t = "Tab31", u = ""},{n = "Func32", t = "Tab32", u = ""},{n = "Func33", t = "Tab33", u = ""},{n = "Func34", t = "Tab34", u = ""},{n = "Func35", t = "Tab35", u = ""},
+    {n = "Func36", t = "Tab36", u = ""},{n = "Func37", t = "Tab37", u = ""},{n = "Func38", t = "Tab38", u = ""},{n = "Func39", t = "Tab39", u = ""},{n = "Func40", t = "Tab40", u = ""},
+    {n = "Func41", t = "Tab41", u = ""},{n = "Func42", t = "Tab42", u = ""},{n = "Func43", t = "Tab43", u = ""},{n = "Func44", t = "Tab44", u = ""},{n = "Func45", t = "Tab45", u = ""},
+    {n = "Func46", t = "Tab46", u = ""},{n = "Func47", t = "Tab47", u = ""},{n = "Func48", t = "Tab48", u = ""},{n = "Func49", t = "Tab49", u = ""},{n = "Func50", t = "Tab50", u = ""},
+    {n = "Func51", t = "Tab51", u = ""},{n = "Func52", t = "Tab52", u = ""},{n = "Func53", t = "Tab53", u = ""},{n = "Func54", t = "Tab54", u = ""},{n = "Func55", t = "Tab55", u = ""},
+    {n = "Func56", t = "Tab56", u = ""},{n = "Func57", t = "Tab57", u = ""},{n = "Func58", t = "Tab58", u = ""},{n = "Func59", t = "Tab59", u = ""},{n = "Func60", t = "Tab60", u = ""},
+    {n = "Func61", t = "Tab61", u = ""},{n = "Func62", t = "Tab62", u = ""},{n = "Func63", t = "Tab63", u = ""},{n = "Func64", t = "Tab64", u = ""},{n = "Func65", t = "Tab65", u = ""},
+    {n = "Func66", t = "Tab66", u = ""},{n = "Func67", t = "Tab67", u = ""},{n = "Func68", t = "Tab68", u = ""},{n = "Func69", t = "Tab69", u = ""},{n = "Func70", t = "Tab70", u = ""},
+    {n = "Func71", t = "Tab71", u = ""},{n = "Func72", t = "Tab72", u = ""},{n = "Func73", t = "Tab73", u = ""},{n = "Func74", t = "Tab74", u = ""},{n = "Func75", t = "Tab75", u = ""},
+    {n = "Func76", t = "Tab76", u = ""},{n = "Func77", t = "Tab77", u = ""},{n = "Func78", t = "Tab78", u = ""},{n = "Func79", t = "Tab79", u = ""},{n = "Func80", t = "Tab80", u = ""},
+    {n = "Func81", t = "Tab81", u = ""},{n = "Func82", t = "Tab82", u = ""},{n = "Func83", t = "Tab83", u = ""},{n = "Func84", t = "Tab84", u = ""},{n = "Func85", t = "Tab85", u = ""},
+    {n = "Func86", t = "Tab86", u = ""},{n = "Func87", t = "Tab87", u = ""},{n = "Func88", t = "Tab88", u = ""},{n = "Func89", t = "Tab89", u = ""},{n = "Func90", t = "Tab90", u = ""},
+    {n = "Func91", t = "Tab91", u = ""},{n = "Func92", t = "Tab92", u = ""},{n = "Func93", t = "Tab93", u = ""},{n = "Func94", t = "Tab94", u = ""},{n = "Func95", t = "Tab95", u = ""},
+    {n = "Func96", t = "Tab96", u = ""},{n = "Func97", t = "Tab97", u = ""},{n = "Func98", t = "Tab98", u = ""},{n = "Func99", t = "Tab99", u = ""},{n = "Func100", t = "Tab100", u = ""}
 }
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "MzSRHub"
 screenGui.Parent = CoreGui
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
 local function showNotification(text, type)
+    local duration = SETTINGS_DATA.NotificationDuration.value or 3
+    
     local notif = Instance.new("Frame")
-    notif.Size = UDim2.new(0, 360, 0, 56)
+    notif.Size = UDim2.new(0, 360, 0, 64)
     notif.Position = UDim2.new(0.5, -180, 0, 20)
     notif.BackgroundColor3 = COLORS.Bg
     notif.BackgroundTransparency = 1
@@ -148,8 +186,8 @@ local function showNotification(text, type)
     icon.Parent = notif
     
     local textLabel = Instance.new("TextLabel")
-    textLabel.Size = UDim2.new(1, -48, 1, 0)
-    textLabel.Position = UDim2.new(0, 44, 0, 0)
+    textLabel.Size = UDim2.new(1, -48, 1, -10)
+    textLabel.Position = UDim2.new(0, 44, 0, 2)
     textLabel.BackgroundTransparency = 1
     textLabel.Text = text
     textLabel.TextColor3 = COLORS.Text
@@ -159,15 +197,46 @@ local function showNotification(text, type)
     textLabel.TextTruncate = Enum.TextTruncate.AtEnd
     textLabel.Parent = notif
     
+    local progressBg = Instance.new("Frame")
+    progressBg.Size = UDim2.new(1, -48, 0, 3)
+    progressBg.Position = UDim2.new(0, 44, 1, -4)
+    progressBg.BackgroundColor3 = Color3.fromRGB(40, 45, 60)
+    progressBg.BackgroundTransparency = 0.5
+    progressBg.BorderSizePixel = 0
+    progressBg.Parent = notif
+    local progressBgCorner = Instance.new("UICorner")
+    progressBgCorner.CornerRadius = UDim.new(1, 0)
+    progressBgCorner.Parent = progressBg
+    
+    local progressBar = Instance.new("Frame")
+    progressBar.Size = UDim2.new(1, 0, 1, 0)
+    progressBar.BackgroundColor3 = color
+    progressBar.BackgroundTransparency = 0
+    progressBar.BorderSizePixel = 0
+    progressBar.Parent = progressBg
+    local progressBarCorner = Instance.new("UICorner")
+    progressBarCorner.CornerRadius = UDim.new(1, 0)
+    progressBarCorner.Parent = progressBar
+    
     notif.BackgroundTransparency = 1
     notif.Size = UDim2.new(0, 0, 0, 0)
     TweenService:Create(notif, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
         BackgroundTransparency = TRANSPARENCY.Notification,
-        Size = UDim2.new(0, 360, 0, 56)
+        Size = UDim2.new(0, 360, 0, 64)
     }):Play()
     
-    local duration = SETTINGS_DATA.NotificationDuration.value or 3
+    local startTime = tick()
+    local progressConnection = RunService.RenderStepped:Connect(function()
+        local elapsed = tick() - startTime
+        local remaining = math.max(0, 1 - (elapsed / duration))
+        progressBar.Size = UDim2.new(remaining, 0, 1, 0)
+        if remaining <= 0 then
+            progressConnection:Disconnect()
+        end
+    end)
+    
     task.wait(duration)
+    progressConnection:Disconnect()
     TweenService:Create(notif, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
         BackgroundTransparency = 1,
         Size = UDim2.new(0, 0, 0, 0)
@@ -206,9 +275,9 @@ headerSide.Parent = sidebar
 
 local titleMain = Instance.new("TextLabel")
 titleMain.Size = UDim2.new(1, -16, 0, 28)
-titleMain.Position = UDim2.new(0, 12, 0, 16)
+titleMain.Position = UDim2.new(0, 12, 0, 10)
 titleMain.BackgroundTransparency = 1
-titleMain.Text = CONFIG.MainTitle
+titleMain.Text = "MnSr"
 titleMain.TextColor3 = COLORS.Text
 titleMain.TextSize = 24
 titleMain.Font = Enum.Font.GothamBold
@@ -217,9 +286,9 @@ titleMain.Parent = headerSide
 
 local titleSub = Instance.new("TextLabel")
 titleSub.Size = UDim2.new(1, -16, 0, 18)
-titleSub.Position = UDim2.new(0, 12, 0, 46)
+titleSub.Position = UDim2.new(0, 12, 0, 40)
 titleSub.BackgroundTransparency = 1
-titleSub.Text = CONFIG.SubTitle
+titleSub.Text = "MiniSeres"
 titleSub.TextColor3 = COLORS.TextSub
 titleSub.TextSize = 12
 titleSub.Font = Enum.Font.GothamMedium
@@ -227,36 +296,9 @@ titleSub.TextXAlignment = Enum.TextXAlignment.Left
 titleSub.TextTransparency = 0.4
 titleSub.Parent = headerSide
 
-local tabBtns = {}
-local tabContainer = Instance.new("Frame")
-tabContainer.Size = UDim2.new(1, -8, 0, 200)
-tabContainer.Position = UDim2.new(0, 4, 0, 90)
-tabContainer.BackgroundTransparency = 1
-tabContainer.Parent = sidebar
-
-local yPos = 0
-for _, tabName in ipairs(CONFIG.Tabs) do
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1, 0, 0, 36)
-    btn.Position = UDim2.new(0, 0, 0, yPos)
-    btn.BackgroundColor3 = Color3.fromRGB(25, 30, 45)
-    btn.BackgroundTransparency = TRANSPARENCY.Tab
-    btn.Text = "  " .. tabName
-    btn.TextColor3 = Color3.fromRGB(180, 190, 210)
-    btn.TextSize = 14
-    btn.Font = Enum.Font.GothamSemibold
-    btn.TextXAlignment = Enum.TextXAlignment.Left
-    btn.Parent = tabContainer
-    local btnCorner = Instance.new("UICorner")
-    btnCorner.CornerRadius = UDim.new(0, 8)
-    btnCorner.Parent = btn
-    table.insert(tabBtns, btn)
-    yPos = yPos + 42
-end
-
 local profileFrame = Instance.new("Frame")
-profileFrame.Size = UDim2.new(1, -8, 0, 64)
-profileFrame.Position = UDim2.new(0, 4, 1, -72)
+profileFrame.Size = UDim2.new(1, -8, 0, 56)
+profileFrame.Position = UDim2.new(0, 4, 0, 70)
 profileFrame.BackgroundColor3 = Color3.fromRGB(25, 30, 45)
 profileFrame.BackgroundTransparency = 0.6
 profileFrame.Parent = sidebar
@@ -264,23 +306,24 @@ local profileCorner = Instance.new("UICorner")
 profileCorner.CornerRadius = UDim.new(0, 10)
 profileCorner.Parent = profileFrame
 
-local avatarText = Instance.new("TextLabel")
-avatarText.Size = UDim2.new(0, 38, 0, 38)
-avatarText.Position = UDim2.new(0, 8, 0.5, -19)
-avatarText.BackgroundColor3 = Color3.fromRGB(40, 45, 60)
-avatarText.BackgroundTransparency = 0
-avatarText.Text = player.Name:sub(1,1):upper()
-avatarText.TextColor3 = COLORS.Text
-avatarText.TextSize = 18
-avatarText.Font = Enum.Font.GothamBold
-avatarText.Parent = profileFrame
+local avatarImage = Instance.new("ImageLabel")
+avatarImage.Size = UDim2.new(0, 34, 0, 34)
+avatarImage.Position = UDim2.new(0, 8, 0.5, -17)
+avatarImage.BackgroundColor3 = Color3.fromRGB(40, 45, 60)
+avatarImage.BackgroundTransparency = 0
+if AVATAR_URL ~= "" then
+    avatarImage.Image = AVATAR_URL
+else
+    avatarImage.Image = "rbxassetid://6031095031"
+end
+avatarImage.Parent = profileFrame
 local avatarCorner = Instance.new("UICorner")
 avatarCorner.CornerRadius = UDim.new(1, 0)
-avatarCorner.Parent = avatarText
+avatarCorner.Parent = avatarImage
 
 local nameMain = Instance.new("TextLabel")
 nameMain.Size = UDim2.new(0, 80, 0, 16)
-nameMain.Position = UDim2.new(0, 50, 0, 14)
+nameMain.Position = UDim2.new(0, 48, 0, 12)
 nameMain.BackgroundTransparency = 1
 nameMain.Text = player.Name
 nameMain.TextColor3 = COLORS.Text
@@ -291,7 +334,7 @@ nameMain.Parent = profileFrame
 
 local nameSub = Instance.new("TextLabel")
 nameSub.Size = UDim2.new(0, 80, 0, 14)
-nameSub.Position = UDim2.new(0, 50, 0, 34)
+nameSub.Position = UDim2.new(0, 48, 0, 30)
 nameSub.BackgroundTransparency = 1
 nameSub.Text = "@" .. player.DisplayName
 nameSub.TextColor3 = COLORS.TextSub
@@ -300,9 +343,45 @@ nameSub.Font = Enum.Font.Gotham
 nameSub.TextXAlignment = Enum.TextXAlignment.Left
 nameSub.Parent = profileFrame
 
+local tabContainer = Instance.new("ScrollingFrame")
+tabContainer.Size = UDim2.new(1, -8, 0, 210)
+tabContainer.Position = UDim2.new(0, 4, 0, 134)
+tabContainer.BackgroundTransparency = 1
+tabContainer.BorderSizePixel = 0
+tabContainer.ScrollBarThickness = 3
+tabContainer.ScrollingDirection = Enum.ScrollingDirection.Y
+tabContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
+tabContainer.Parent = sidebar
+
+local tabLayout = Instance.new("UIListLayout")
+tabLayout.Padding = UDim.new(0, 4)
+tabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+tabLayout.Parent = tabContainer
+
+local tabBtns = {}
+
+for _, tabName in ipairs(CONFIG.Tabs) do
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, 0, 0, 34)
+    btn.BackgroundColor3 = Color3.fromRGB(25, 30, 45)
+    btn.BackgroundTransparency = TRANSPARENCY.Tab
+    btn.Text = "  " .. tabName
+    btn.TextColor3 = Color3.fromRGB(180, 190, 210)
+    btn.TextSize = 13
+    btn.Font = Enum.Font.GothamSemibold
+    btn.TextXAlignment = Enum.TextXAlignment.Left
+    btn.Parent = tabContainer
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 8)
+    btnCorner.Parent = btn
+    table.insert(tabBtns, btn)
+end
+
+tabContainer.CanvasSize = UDim2.new(0, 0, 0, #CONFIG.Tabs * 38 + 8)
+
 local content = Instance.new("Frame")
-content.Size = UDim2.new(1, -156, 1, -12)
-content.Position = UDim2.new(0, 146, 0, 6)
+content.Size = UDim2.new(1, -152, 1, -12)
+content.Position = UDim2.new(0, 142, 0, 6)
 content.BackgroundColor3 = COLORS.Content
 content.BackgroundTransparency = TRANSPARENCY.Content
 content.BorderSizePixel = 0
@@ -318,7 +397,7 @@ contentHeader.BackgroundTransparency = 1
 contentHeader.Parent = content
 
 local headerTitle = Instance.new("TextLabel")
-headerTitle.Size = UDim2.new(0, 160, 1, 0)
+headerTitle.Size = UDim2.new(0, 120, 1, 0)
 headerTitle.BackgroundTransparency = 1
 headerTitle.Text = "CONTROL"
 headerTitle.TextColor3 = COLORS.Text
@@ -326,6 +405,84 @@ headerTitle.TextSize = 18
 headerTitle.Font = Enum.Font.GothamBold
 headerTitle.TextXAlignment = Enum.TextXAlignment.Left
 headerTitle.Parent = contentHeader
+
+-- SYSTEM MONITOR (FPS, PING, RAM)
+local monitorFrame = Instance.new("Frame")
+monitorFrame.Size = UDim2.new(0, 210, 1, 0)
+monitorFrame.Position = UDim2.new(0.5, -20, 0, 0)
+monitorFrame.BackgroundTransparency = 1
+monitorFrame.Parent = contentHeader
+
+local fpsLabel = Instance.new("TextLabel")
+fpsLabel.Size = UDim2.new(0, 60, 1, 0)
+fpsLabel.Position = UDim2.new(0, 0, 0, 0)
+fpsLabel.BackgroundTransparency = 1
+fpsLabel.Text = "FPS: 60"
+fpsLabel.TextColor3 = COLORS.Green
+fpsLabel.TextSize = 13
+fpsLabel.Font = Enum.Font.GothamMedium
+fpsLabel.TextXAlignment = Enum.TextXAlignment.Center
+fpsLabel.Parent = monitorFrame
+
+local pingLabel = Instance.new("TextLabel")
+pingLabel.Size = UDim2.new(0, 60, 1, 0)
+pingLabel.Position = UDim2.new(0, 70, 0, 0)
+pingLabel.BackgroundTransparency = 1
+pingLabel.Text = "Ping: 20ms"
+pingLabel.TextColor3 = COLORS.Blue
+pingLabel.TextSize = 13
+pingLabel.Font = Enum.Font.GothamMedium
+pingLabel.TextXAlignment = Enum.TextXAlignment.Center
+pingLabel.Parent = monitorFrame
+
+local ramLabel = Instance.new("TextLabel")
+ramLabel.Size = UDim2.new(0, 60, 1, 0)
+ramLabel.Position = UDim2.new(0, 140, 0, 0)
+ramLabel.BackgroundTransparency = 1
+ramLabel.Text = "RAM: 0.0GB"
+ramLabel.TextColor3 = COLORS.Orange
+ramLabel.TextSize = 13
+ramLabel.Font = Enum.Font.GothamMedium
+ramLabel.TextXAlignment = Enum.TextXAlignment.Center
+ramLabel.Parent = monitorFrame
+
+local statsConnection = RunService.RenderStepped:Connect(function()
+    local fps = math.floor(1 / RunService.Heartbeat:Wait())
+    fpsLabel.Text = "FPS: " .. fps
+    if fps >= 50 then
+        fpsLabel.TextColor3 = COLORS.Green
+    elseif fps >= 30 then
+        fpsLabel.TextColor3 = COLORS.Orange
+    else
+        fpsLabel.TextColor3 = COLORS.Red
+    end
+    
+    local ping = math.floor(RunService.Heartbeat:Wait() * 1000)
+    pingLabel.Text = "Ping: " .. ping .. "ms"
+    if ping <= 50 then
+        pingLabel.TextColor3 = COLORS.Green
+    elseif ping <= 100 then
+        pingLabel.TextColor3 = COLORS.Orange
+    else
+        pingLabel.TextColor3 = COLORS.Red
+    end
+    
+    local ram = math.floor(collectgarbage("count") / 1024 * 100) / 100
+    ramLabel.Text = "RAM: " .. ram .. "GB"
+    if ram <= 2 then
+        ramLabel.TextColor3 = COLORS.Green
+    elseif ram <= 4 then
+        ramLabel.TextColor3 = COLORS.Orange
+    else
+        ramLabel.TextColor3 = COLORS.Red
+    end
+end)
+
+screenGui.AncestryChanged:Connect(function()
+    if not screenGui.Parent then
+        statsConnection:Disconnect()
+    end
+end)
 
 local settingsBtn = Instance.new("TextButton")
 settingsBtn.Size = UDim2.new(0, 34, 0, 34)
@@ -375,6 +532,7 @@ body.Position = UDim2.new(0, 8, 0, 58)
 body.BackgroundTransparency = 1
 body.BorderSizePixel = 0
 body.ScrollBarThickness = 3
+body.ScrollingDirection = Enum.ScrollingDirection.Y
 body.CanvasSize = UDim2.new(0, 0, 0, 0)
 body.Parent = content
 
@@ -433,6 +591,7 @@ settingsBody.Position = UDim2.new(0, 16, 0, 68)
 settingsBody.BackgroundTransparency = 1
 settingsBody.BorderSizePixel = 0
 settingsBody.ScrollBarThickness = 3
+settingsBody.ScrollingDirection = Enum.ScrollingDirection.Y
 settingsBody.CanvasSize = UDim2.new(0, 0, 0, 0)
 settingsBody.Parent = settingsUI
 
@@ -441,9 +600,6 @@ settingsLayout.Padding = UDim.new(0, 8)
 settingsLayout.SortOrder = Enum.SortOrder.LayoutOrder
 settingsLayout.Parent = settingsBody
 
-local settingsWidgets = {}
-
--- Đếm số phần tử trong SETTINGS_DATA
 local settingsCount = 0
 for _ in pairs(SETTINGS_DATA) do settingsCount = settingsCount + 1 end
 
@@ -495,7 +651,11 @@ for key, data in pairs(SETTINGS_DATA) do
             data.value = options[idx]
             btn.Text = data.value
             SETTINGS_DATA[key] = data
-            showNotification(key .. " → " .. data.value, "info")
+            if data.action then
+                data.action(data.value)
+            else
+                showNotification(key .. " → " .. data.value, "info")
+            end
         end)
         
     elseif data.type == "slider" then
@@ -525,6 +685,7 @@ for key, data in pairs(SETTINGS_DATA) do
 end
 
 settingsBody.CanvasSize = UDim2.new(0, 0, 0, settingsCount * 58 + 8)
+
 local function renderFunctions(tabName)
     for _, child in ipairs(body:GetChildren()) do
         if child:IsA("TextButton") then child:Destroy() end
@@ -635,6 +796,7 @@ backBtn.MouseButton1Click:Connect(function()
         Size = UDim2.new(0, 720, 0, 500)
     }):Play()
 end)
+
 local miniFrame = nil
 local isFolded = false
 local dragIndex = 1
@@ -683,7 +845,6 @@ local function createMiniMode()
     dragIcon.TextSize = 18
     dragIcon.Font = Enum.Font.GothamBold
     dragIcon.Parent = miniFrame
-    
     animateDrag(dragIcon)
     
     local openBtn = Instance.new("TextButton")
