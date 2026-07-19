@@ -57,7 +57,7 @@ local functionTable = {
     {n = "Monitor", t = "Control", u = ""},
     {n = "Fly", t = "Utility", u = "https://raw.githubusercontent.com/.../fly.lua"},
     {n = "Teleport", t = "Utility", u = "https://raw.githubusercontent.com/.../tele.lua"},
-    {n = "Settings", t = "System", u = ""}
+    {n = "Settings", t = "System", u = ""},
     {n = "Mnitor", t = "Control", u = ""},
     {n = "Monitor", t = "Control", u = ""},
     {n = "Monitor", t = "Control", u = ""},
@@ -94,9 +94,7 @@ local functionTable = {
     {n = "f", t = "Control", u = ""},
     {n = "g", t = "Control", u = ""},
     {n = "h", t = "Control", u = ""},
-    {n = "t", t = "Control", u = ""},
-    
-    
+    {n = "t", t = "Control", u = ""}
 }
 
 local screenGui = Instance.new("ScreenGui")
