@@ -96,14 +96,15 @@ local SETTINGS_DATA = {
 
 local CONFIG = {
     Tabs = {
-        "TSB"
+        "Tech"
     }
 }
 
 local functionTable = {
-    {n = "Kiba Tech", t = "TSB", u = "https://gist.githubusercontent.com/MiniSeres/5f14b30ea1651f93fcf03f1ccfe14e4e/raw/77b825e921ad3efa4ac808ab7e03e599b0b4df0d/kyotoModZ.lua"},
-}
+    {n = "Kiba Tech", t = "Tech", u = "https://gist.githubusercontent.com/MiniSeres/5f14b30ea1651f93fcf03f1ccfe14e4e/raw/77b825e921ad3efa4ac808ab7e03e599b0b4df0d/kyotoModZ.lua"},
+    {n = "Kyoto Tech", t = "Tech", u = "https://gist.githubusercontent.com/MiniSeres/834cf4dfc939cab5978991f32ac20e51/raw/25abc74bf6bf400089ff30d579ce930cc706de5f/kyoto.lua"},
 
+}
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "MzSRHub"
 screenGui.Parent = CoreGui
